@@ -8,6 +8,28 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
+@keyframes orbit {
+  0% {
+    transform:
+      rotate(calc(var(--angle) * 1deg)) translateY(calc(var(--radius) * 1px)) rotate(calc(var(--angle) * -1deg));
+  }
+  100% {
+    transform:
+      rotate(calc(var(--angle) * 1deg + 360deg)) translateY(calc(var(--radius) * 1px)) rotate(calc((var(--angle) * -1deg) - 360deg));
+  }
+}
+
+@theme {
+  --orbit-animation: orbit calc(var(--duration, 10) * 1s) linear infinite;
+}
+
+/* You can apply the animation with: animation: var(--orbit-animation); */
+
+.animate-orbit {
+  animation: var(--orbit-animation);
+}
+
+
 
 :root {
   --background: hsl(0 0% 100%);

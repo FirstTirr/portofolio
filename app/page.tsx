@@ -1,5 +1,6 @@
 import About from "@/components/About";
 import Skill from "@/components/Skill";
+import Footer from "@/components/Footer";
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
 import { VelocityScroll } from "@/components/magicui/scroll-based-velocity";
 import { TypingAnimation } from "@/components/magicui/typing-animation";
@@ -34,6 +35,7 @@ export default function Home() {
 
       <About />
       <Skill />
+      <Footer />
     </>
   );
 }

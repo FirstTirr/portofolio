@@ -17,8 +17,8 @@ const ThemeToggle = () => {
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="mt- text-sm w-25 h-8 shadow-[0_4px_14px_0_rgb(0,118,255,39%)] hover:shadow-[0_6px_20px_rgba(0,118,255,23%)] hover:bg-blue-800 bg-[#0070f3] rounded-md text-white font-light hover:text-gray-300 transition duration-200 ease-linear cursor-pointer"
-    >change theme</button>
+      className="mt-1 text-sm w-18 h-5 shadow-[0_4px_14px_0_rgb(0,118,255,39%)] hover:shadow-[0_6px_20px_rgba(0,118,255,23%)] hover:bg-blue-800 bg-[#0070f3] rounded-md text-white font-light hover:text-gray-300 transition duration-200 ease-linear cursor-pointer"
+    ></button>
   );
 };
 

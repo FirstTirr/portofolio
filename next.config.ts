@@ -1,10 +1,12 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   images: {
-    domains: ['i.ytimg.com'], // Add your external image domains here
+    domains: [
+      "api.microlink.io", // Microlink Image Preview
+    ],
   },
-  /* other config options here */
 };
 
-export default nextConfig;
+module.exports = nextConfig;

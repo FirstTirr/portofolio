@@ -8,6 +8,8 @@ import ThemeToggle from "@/components/ThemeToggle";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { div } from "framer-motion/client";
 import Image from "next/image";
+import { RippleButton } from "@/components/magicui/ripple-button";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -21,8 +23,11 @@ export default function Home() {
 
         <div className="px-9 flex sm:flex-row flex-col gap-2 sm:gap-[7rem] md:gap-[5rem] justify-center -mt-96 lg:-mt-[30rem]">
           <InteractiveHoverButton>Download CV</InteractiveHoverButton>
-          <InteractiveHoverButton>My Project</InteractiveHoverButton>
-          <InteractiveHoverButton>My WhatsApp</InteractiveHoverButton>
+
+          <InteractiveHoverButton><Link href="./project">project</Link></InteractiveHoverButton>
+            
+
+          <InteractiveHoverButton><Link href="https://wa.me/6281266591758">My WhatsApp</Link></InteractiveHoverButton>
         </div>
         <VelocityScroll
           numRows={1}

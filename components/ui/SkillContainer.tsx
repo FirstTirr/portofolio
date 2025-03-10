@@ -4,12 +4,12 @@ import { OrbitingCircles } from "../magicui/orbiting-circles";
 
 export function SkillContainer() {
     return (
-        <div className="relative flex h-[820px] w-full flex-col items-center justify-center overflow-hidden">
+        <div className="relative flex h-[860px] w-full flex-col items-center justify-center overflow-hidden">
             <div>
                 <h1 className="-mt-[26rem] font-bold text-5xl">My Capabilities</h1>
             </div>
           <div className="absolute z-10">
-          <img src="" alt="foto le" className="w-20 h-20" />
+          <img src="foto-skill-r.png" alt="" className="w-30 h-30" />
         </div>
           <OrbitingCircles iconSize={40}>
             <img src="css-nb.svg" />

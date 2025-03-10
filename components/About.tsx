@@ -1,6 +1,6 @@
 import React from "react";
 import { Montserrat } from "next/font/google";
-import { TextReveal } from "./magicui/text-reveal";
+import { MaskContainer } from "./ui/svg-mask-effect";
 
 const montserrat = Montserrat({
   weight: ["300", "900", "700"],
@@ -9,16 +9,17 @@ const montserrat = Montserrat({
 
 const About = () => {
   return (
-    <div
-      className="min-w-full min-h-screen flex items-center justify-center -mt-[32rem]"
-      id="about"
-    >
-      <h3 className="font-bold text-3xl -translate-y-10 hidden sm:block p-4">
-        keep<span className="text-sky-400"> Scrolling</span>
-      </h3>
-      <div className={`${montserrat.className}`}>
-        <TextReveal text="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum sint laudantium quibusdam voluptates delectus obcaecati ullam quisquam earum porro alias quia, ipsa necessitatibus fugit, rem doloremque sunt similique in odio quo corporis maxime. Voluptas molestiae beatae, sapiente voluptate non qui neque ut magni, alias, tenetur saepe molestias aliquid assumenda maxime." />
-      </div>
+    <div className="h-[60rem] w-full flex items-center justify-center  overflow-hidden -mt-[35rem]">
+      <MaskContainer
+        revealText={
+          <p className="max-w-5xl mx-auto text-slate-800 text-center  text-5xl font-bold">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi harum provident suscipit enim reiciendis, omnis ab distinctio, aliquid officiis voluptates doloribus? Vero tempore labore id non ut eveniet voluptas maxime?
+          </p>
+        }
+        className="h-[60rem] border rounded-md"
+      >
+        Lorem, ipsum dolor sit <span className="text-red-500">consectetur adipisicing elit.</span> Animi harum provident suscipit enim reiciendis, omnis ab distinctio, aliquid officiis voluptates doloribus? Vero tempore labore id non ut <span className="text-red-500">eveniet voluptas maxime?</span>.
+      </MaskContainer>
     </div>
   );
 };

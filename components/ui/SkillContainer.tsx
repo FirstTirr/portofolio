@@ -15,7 +15,7 @@ export function SkillContainer() {
         <img
           src="foto-skill-r.png"
           alt=""
-          className="w-30 h-30 hover:w-35 hover:h-35"
+          className="w-30 h-30 hover:w-36 hover:h-36"
         />
       </div>
       <OrbitingCircles iconSize={40}>

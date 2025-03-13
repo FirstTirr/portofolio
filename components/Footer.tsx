@@ -48,6 +48,7 @@ export default function Footer() {
   };
 
   return (
+  <>
     <motion.footer
       className="w-full bg-black text-white py-8"
       initial="hidden"
@@ -90,5 +91,6 @@ export default function Footer() {
         </motion.div>
       </div>
     </motion.footer>
+  </>
   );
 }

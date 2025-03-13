@@ -7,7 +7,7 @@ const Nav: React.FC = () => {
   return (
     <nav>
       <div className="p-1 item-center justify-between flex w-full">
-        <a href="#" className="px-6 hover:text-blue-500 font-semibold">
+        <a href="#" className="px-0.5 hover:text-blue-500 font-bold">
           <TextAnimate animation="slideLeft" by="character">
             FATHIR ADZAN SATIA
           </TextAnimate>

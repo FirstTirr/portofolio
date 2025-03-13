@@ -5,7 +5,7 @@ import { TextAnimate } from "./magicui/text-animate";
 
 const Nav: React.FC = () => {
   return (
-    <nav>
+    <nav className="fixed top-0 left-0 w-full z-50">
       <div className="p-1 item-center justify-between flex w-full">
         <a href="#" className="px-0.5 hover:text-blue-500 font-bold">
           <TextAnimate animation="slideLeft" by="character">

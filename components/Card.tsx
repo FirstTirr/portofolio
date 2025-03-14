@@ -9,7 +9,7 @@ const Skill = () => {
     <>
       <div className="text-center text-4xl font-bold -mt-96">
         <p>My Achievment</p>
-        <div className="flex justify-center space-x-10 mt-10">
+        <div className="flex flex-col sm:flex-row justify-center space-y-10 sm:space-y-0 sm:space-x-10 mt-10">
           <CardContainer className="inter-var">
             <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border">
               <CardItem

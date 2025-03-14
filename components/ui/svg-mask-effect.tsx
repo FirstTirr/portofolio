@@ -7,7 +7,7 @@ export const MaskContainer = ({
   children,
   revealText,
   size = 10,
-  revealSize = 600,
+  revealSize = 400,
   className,
 }: {
   children?: string | React.ReactNode;
@@ -35,7 +35,10 @@ export const MaskContainer = ({
       }
     };
   }, []);
-  let maskSize = isHovered ? revealSize : size;
+
+  // Adjust revealSize based on screen width
+  const adjustedRevealSize = window.innerWidth < 640 ? 10000 : revealSize;
+  let maskSize = isHovered ? adjustedRevealSize : size;
 
   return (
     <motion.div
@@ -65,13 +68,13 @@ export const MaskContainer = ({
           onMouseLeave={() => {
             setIsHovered(false);
           }}
-          className="max-w-4xl mx-auto text-center text-white  text-4xl font-bold relative z-20"
+          className="max-w-6xl p-7 md:px-[4rem] sm:px-[6.5rem] mx-auto text-justify text-white text-2xl md:text-3xl sm:text-4xl font-bold relative z-20"
         >
           {children}
         </div>
       </motion.div>
 
-      <div className="w-full h-full flex items-center justify-center  text-white">
+      <div className="w-full h-full flex items-center justify-center text-white">
         {revealText}
       </div>
     </motion.div>

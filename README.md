@@ -1,6 +1,6 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Jadi gini le
+## Jadi gini le, tidak tau kenapa
 
 First, run the development server:
 

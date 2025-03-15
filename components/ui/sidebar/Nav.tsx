@@ -1,12 +1,7 @@
 import NavHome from "./NavHome";
 import NavMenu from "./NavMenu";
-import { useEffect } from "react";
 
 export default function Nav() {
-  useEffect(() => {
-    // Debug log to verify the component is rendering
-    console.log("Nav component mounted");
-  }, []);
 
   return (
     <nav className="pointer-events-none fixed z-[999] h-full w-full">

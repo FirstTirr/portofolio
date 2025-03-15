@@ -1,7 +1,7 @@
 //@ts-nocheck
 "use client";
 
-import useIsomorphicLayoutEffect from "@/components/hooks/useIsomorphicLayoutEffect";
+import useIsomorphicLayoutEffect from "@/components/hooks/useIsomorph";
 import { cn } from "@/lib/utils";
 import gsap from "gsap";
 import { useRef, useState } from "react";
@@ -102,7 +102,7 @@ export default function NavMenu() {
               title={"Home"}
               active={active}
               duration={1}
-              handleScroll={() => handleScroll("#hero")}
+              handleScroll={() => handleScroll("#home")}
             />
           </MagneticEffect>
           <MagneticEffect>
@@ -113,20 +113,13 @@ export default function NavMenu() {
               handleScroll={() => handleScroll("#about")}
             />
           </MagneticEffect>
-          <MagneticEffect>
-            <NavMenuLink
-              title={"Testimonials"}
-              active={active}
-              duration={1.2}
-              handleScroll={() => handleScroll("#testimonials")}
-            />
-          </MagneticEffect>
+          
           <MagneticEffect>
             <NavMenuLink
               title={"Skills"}
               active={active}
               duration={1.3}
-              handleScroll={() => handleScroll("#skills")}
+              handleScroll={() => handleScroll("#skill")}
             />
           </MagneticEffect>
           <MagneticEffect>
@@ -135,7 +128,7 @@ export default function NavMenu() {
               active={active}
               duration={1.3}
               handleScroll={() => {
-                router.push("/projects");
+                router.push("/project");
               }}
             />
           </MagneticEffect>

@@ -15,7 +15,7 @@ const About = () => {
       </h3>
       <MaskContainer
         revealText={
-          <p className="max-w-6xl mx-auto text-slate-800 text-justify text-2xl md:text-3xl sm:text-4xl font-bold p-7 md:px-[4rem] sm:px-[6.5rem]">
+          <p className="max-w-6xl mx-auto text-slate-800 text-start text-2xl md:text-3xl sm:text-4xl font-bold p-7 md:px-[4rem] sm:px-[6.5rem]">
             Hi! I'm Fathir Adzan Satia, a vocational high school student from
             West Sumatra, Indonesia. I'm currently studying at SMKN 4
             Payakumbuh, majoring in PPLG (Software and Game Development). I'm

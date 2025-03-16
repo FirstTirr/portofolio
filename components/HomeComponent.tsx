@@ -13,19 +13,25 @@ export default function Home() {
     <>
       <div className="flex flex-col items-center justify-center relative">
         <div className="min-h-screen sm:translate-y-36 translate-y-[14rem] flex-col grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 gap-9 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-          <TypingAnimation className="text-blue-400 text-center text-8xl font-black italic">
+          <TypingAnimation className="text-blue-400 text-center text-8xl sm:text-6xl md:text-8xl font-black italic">
             FATHIR ADZAN SATIA
           </TypingAnimation>
         </div>
 
-        <div className="px-9 flex sm:flex-row flex-col gap-2 sm:gap-[7rem] md:gap-[5rem] justify-center -mt-96 lg:-mt-[30rem]">
-          <InteractiveHoverButton>Download CV</InteractiveHoverButton>
+        <div className="px-9 flex flex-col sm:flex-row gap-4 sm:gap-8 md:gap-12 justify-center -mt-48 sm:-mt-28 md:-mt-[28rem] lg:-mt-[27rem]">
+          <InteractiveHoverButton>
+            <Link href="/cv">Download CV</Link>
+          </InteractiveHoverButton>
 
-          <InteractiveHoverButton><Link href="./project">My Project</Link></InteractiveHoverButton>
-            
+          <InteractiveHoverButton>
+            <Link href="/project">My Project</Link>
+          </InteractiveHoverButton>
 
-          <InteractiveHoverButton><Link href="https://wa.me/6281266591758">My WhatsApp</Link></InteractiveHoverButton>
+          <InteractiveHoverButton>
+            <Link href="https://wa.me/6281266591758">My WhatsApp</Link>
+          </InteractiveHoverButton>
         </div>
+
         <VelocityScroll
           numRows={1}
           defaultVelocity={7}

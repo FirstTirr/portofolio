@@ -28,7 +28,7 @@ const About = () => {
             keep up with the development of technology in today's era.
           </p>
         }
-        className="h-[45rem] rounded-md"
+        className="h-[57rem] rounded-md"
       >
         Hi! I'm<span className="text-red-500"> Fathir Adzan Satia,</span> a
         vocational high school student from West Sumatra, Indonesia. I'm

@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export const MaskContainer = ({
@@ -37,7 +37,8 @@ export const MaskContainer = ({
   }, []);
 
   // Adjust revealSize based on screen width
-  const adjustedRevealSize = window.innerWidth < 640 ? 10000 : revealSize;
+  const adjustedRevealSize =
+    typeof window !== "undefined" && window.innerWidth < 640 ? 10000 : revealSize;
   let maskSize = isHovered ? adjustedRevealSize : size;
 
   return (

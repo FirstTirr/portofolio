@@ -11,6 +11,7 @@ import NavMenuLine from "./NavLine";
 import NavMenuLink from "./NavLink";
 import NavMenuSocial from "./NavSocial";
 import { useRouter } from "next/navigation";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function NavMenu() {
   const [active, setActive] = useState<boolean>(false);
@@ -142,16 +143,7 @@ export default function NavMenu() {
                 active={active}
                 classes="pr-6"
                 duration={1}
-                link="https://github.com/dityaperdana"
-              />
-            </MagneticEffect>
-            <MagneticEffect>
-              <NavMenuSocial
-                title="Dicoding"
-                active={active}
-                classes="pr-6"
-                duration={1.2}
-                link="https://www.dicoding.com/users/raditya_alfarisi/academies"
+                link="https://github.com/FirstTirr"
               />
             </MagneticEffect>
             <MagneticEffect>
@@ -160,7 +152,7 @@ export default function NavMenu() {
                 active={active}
                 classes="pr-6"
                 duration={1.4}
-                link="https://www.instagram.com/radityaalfarisi2009/_"
+                link="https://www.instagram.com/tirr_adzan/_"
               />
             </MagneticEffect>
             <MagneticEffect>
@@ -169,7 +161,7 @@ export default function NavMenu() {
                 active={active}
                 classes="pr-6"
                 duration={1.6}
-                link="https://www.tiktok.com/@ditya_perdana?is_from_webapp=1&sender_device=pc"
+                link="https://www.tiktok.com/@fathir_adz"
               />
             </MagneticEffect>
             <MagneticEffect>
@@ -178,11 +170,12 @@ export default function NavMenu() {
                 active={active}
                 classes="pr-6"
                 duration={1.8}
-                link="mailto:athallarafardhan44@gmail.com"
+                link="mailto:fathiradzans@gmail.com"
               />
             </MagneticEffect>
           </div>
           <div className="flex px-[clamp(1.25rem,3vw,2.5rem)]">
+          <ThemeToggle />
           </div>
         </div>
       </div>

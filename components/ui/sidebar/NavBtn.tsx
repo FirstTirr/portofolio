@@ -30,7 +30,7 @@ export default function NavMenuBtn({
   return (
     <div
       ref={el}
-      className="pointer-events-auto absolute right-[2.5%] top-4 z-[51] translate-x-[calc(5rem+2.5vw)]"
+      className="pointer-events-auto absolute right-[3%] top-4 z-[51] translate-x-[calc(5rem+2.5vw)]"
     >
       <MagneticEffect>
         <button tabIndex={0} onClick={() => toggleHamburger(!active)}>

@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "motion/react";
 import { LinkPreview } from "@/components/ui/link-preview";
 import { TextAnimate } from "@/components/magicui/text-animate";
+import { div } from "framer-motion/client";
 
 const Project = () => {
   const sections = [

@@ -6,6 +6,7 @@ import { div } from "framer-motion/client";
 import Image from "next/image";
 import { RippleButton } from "@/components/magicui/ripple-button";
 import Link from "next/link";
+import { ScratchToReveal } from "./ui/scratch-to-reveal";
 
 export default function Home() {
   return (
@@ -29,6 +30,19 @@ export default function Home() {
           <InteractiveHoverButton>
             <Link href="https://wa.me/6281266591758">My WhatsApp</Link>
           </InteractiveHoverButton>
+        </div>
+        <div className="mt-16">
+          <ScratchToReveal
+            width={250}
+            height={250}
+            minScratchPercentage={70}
+            className="flex items-center justify-center overflow-hidden rounded-2xl border-2 bg-gray-100"
+            gradientColors={["#A97CF8", "#F38CB8", "#FDCC92"]}
+          >
+            <p className="text-9xl">
+              <img src="foto-home.jpg" alt="me" />
+            </p>
+          </ScratchToReveal>
         </div>
 
         <VelocityScroll

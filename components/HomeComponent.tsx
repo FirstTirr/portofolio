@@ -1,12 +1,8 @@
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
 import { VelocityScroll } from "@/components/magicui/scroll-based-velocity";
 import { TypingAnimation } from "@/components/magicui/typing-animation";
-import { ContainerScroll } from "@/components/ui/container-scroll-animation";
-import { div } from "framer-motion/client";
-import Image from "next/image";
-import { RippleButton } from "@/components/magicui/ripple-button";
-import Link from "next/link";
 import { ScratchToReveal } from "./ui/scratch-to-reveal";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -31,10 +27,17 @@ export default function Home() {
             <Link href="https://wa.me/6281266591758">My WhatsApp</Link>
           </InteractiveHoverButton>
         </div>
-        <div className="mt-16">
+
+        <div className="mt-16 flex flex-col sm:flex-row items-center sm:items-start gap-8 sm:gap-12">
+          <p className="text-center sm:text-left text-3xl font-bold text-gray-600 dark:text-gray-300 sm:mr-4 sm:mt-4 md:mt-23 lg:mt-27">
+            Scratch <span className="text-blue-400">For My</span> Photo{" "}
+            <span className="sm:hidden">👇</span>
+            <span className="hidden sm:inline">👉</span>
+          </p>
+
           <ScratchToReveal
-            width={250}
-            height={250}
+            width={320}
+            height={320}
             minScratchPercentage={70}
             className="flex items-center justify-center overflow-hidden rounded-2xl border-2 bg-gray-100"
             gradientColors={["#A97CF8", "#F38CB8", "#FDCC92"]}

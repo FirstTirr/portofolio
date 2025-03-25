@@ -6,8 +6,8 @@ import { TextAnimate } from "@/components/magicui/text-animate";
 // Certificate data
 export const certificates = [
   {
-    title: "Sertifikat Python",
-    desc: "Menguasai Dasar-Dasar Pemrograman Pyhton.",
+    title: "Sertifikat Python Fundamental",
+    desc: "Menguasai Dasar-Dasar Pemrograman Python.",
     image: "/py.svg",
   },
   {
@@ -26,9 +26,9 @@ export const certificates = [
     image: "/virtualMachine.svg",
   },
   {
-    title: "Sertifikat Anggota Grub Kemalasan",
-    desc: "Ingin Menjadi Programmer Handal Namun Malas Ngoding.",
-    image: "/malas.jpg",
+    title: "Sertifikat Dart Fundamental",
+    desc: "Menguasai Dasar-Dasar Pemrograman Dart.",
+    image: "/dartFundamental.jpg",
   }
 ];
 

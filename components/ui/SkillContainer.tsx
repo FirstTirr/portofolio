@@ -14,7 +14,7 @@ export function SkillContainer() {
       <div className="absolute z-10">
         <img
           src="foto-skill-r.png"
-          alt=""
+          alt="image me"
           className="w-30 h-30 hover:w-36 hover:h-36"
         />
       </div>

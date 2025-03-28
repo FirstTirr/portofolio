@@ -39,7 +39,7 @@ export const ScratchToReveal: React.FC<ScratchToRevealProps> = ({
         0,
         0,
         canvas.width,
-        canvas.height,
+        canvas.height
       );
       gradient.addColorStop(0, gradientColors[0]);
       gradient.addColorStop(0.5, gradientColors[1]);
@@ -59,6 +59,9 @@ export const ScratchToReveal: React.FC<ScratchToRevealProps> = ({
       if (!isScratching) return;
       const touch = event.touches[0];
       scratch(touch.clientX, touch.clientY);
+
+      // Prevent scrolling while scratching
+      event.preventDefault();
     };
 
     const handleDocumentMouseUp = () => {
@@ -71,18 +74,16 @@ export const ScratchToReveal: React.FC<ScratchToRevealProps> = ({
       checkCompletion();
     };
 
-    document.addEventListener("mousedown", handleDocumentMouseMove);
     document.addEventListener("mousemove", handleDocumentMouseMove);
-    document.addEventListener("touchstart", handleDocumentTouchMove);
-    document.addEventListener("touchmove", handleDocumentTouchMove);
+    document.addEventListener("touchmove", handleDocumentTouchMove, {
+      passive: false, // Required to prevent default scrolling
+    });
     document.addEventListener("mouseup", handleDocumentMouseUp);
     document.addEventListener("touchend", handleDocumentTouchEnd);
     document.addEventListener("touchcancel", handleDocumentTouchEnd);
 
     return () => {
-      document.removeEventListener("mousedown", handleDocumentMouseMove);
       document.removeEventListener("mousemove", handleDocumentMouseMove);
-      document.removeEventListener("touchstart", handleDocumentTouchMove);
       document.removeEventListener("touchmove", handleDocumentTouchMove);
       document.removeEventListener("mouseup", handleDocumentMouseUp);
       document.removeEventListener("touchend", handleDocumentTouchEnd);
@@ -92,7 +93,12 @@ export const ScratchToReveal: React.FC<ScratchToRevealProps> = ({
 
   const handleMouseDown = () => setIsScratching(true);
 
-  const handleTouchStart = () => setIsScratching(true);
+  const handleTouchStart = (event: React.TouchEvent) => {
+    setIsScratching(true);
+
+    // Prevent scrolling when starting to scratch
+    event.preventDefault();
+  };
 
   const scratch = (clientX: number, clientY: number) => {
     const canvas = canvasRef.current;

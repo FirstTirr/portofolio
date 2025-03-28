@@ -9,7 +9,7 @@ export default function Home() {
     <>
       <div className="flex flex-col items-center justify-center relative">
         <div className="overflow-hidden min-h-[100vh] min-w-full flex flex-col items-center justify-center relative pb-20 gap-9 font-[family-name:var(--font-geist-sans)]">
-          <TypingAnimation className="text-blue-400 text-center text-8xl sm:text-8xl md:text-9xl lg:text-[7rem] font-black italic">
+          <TypingAnimation className="text-blue-400 text-center text-8xl sm:text-8xl md:text-9xl lg:text-[7rem] font-black italic ">
             FATHIR ADZAN SATIA
           </TypingAnimation>
         </div>

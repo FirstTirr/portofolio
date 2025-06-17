@@ -13,6 +13,13 @@ const Project = () => {
       link: "https://ucapan-wisuda-mkqgivblh-firsttirrs-projects.vercel.app/",
       img: "/project-1.png",
     },
+    {
+      name: "Web Sirkel",
+      category: "Front-End Project",
+      techStack: ["TypeScript", "JavaScript", "Tailwindcss"],
+      link: "https://titik-kumpul-pemula.vercel.app/",
+      img: "/tkp.png",
+    },
   ];
 
   return (

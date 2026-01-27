@@ -2,12 +2,14 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { z } from "zod";
 import prisma from "@/lib/prisma";
-import * as bcrypt from "bcryptjs";
+import bcrypt from "bcryptjs";
 import { authConfig } from "./auth.config";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
   trustHost: true,
+  secret: process.env.AUTH_SECRET,
+  session: { strategy: "jwt" },
   providers: [
     Credentials({
       name: "Admin Login",
@@ -17,6 +19,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       },
       authorize: async (credentials) => {
         try {
+          console.log("Authorize start");
           const schema = z.object({
             username: z.string(),
             password: z.string(),
@@ -25,7 +28,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           const parsed = schema.safeParse(credentials);
 
           if (!parsed.success) {
-            console.log("Invalid credentials structure:", parsed.error);
+            console.log("Invalid credentials structure");
             return null;
           }
 
@@ -36,17 +39,18 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           });
 
           if (!admin) {
-            console.log("Admin not found:", username);
+            console.log("Admin not found");
             return null;
           }
 
           const passwordsMatch = await bcrypt.compare(password, admin.password);
 
           if (!passwordsMatch) {
-            console.log("Password mismatch for:", username);
+            console.log("Password mismatch");
             return null;
           }
 
+          console.log("Login successful");
           return {
             id: admin.id,
             name: admin.username,
@@ -58,6 +62,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       },
     }),
   ],
+});
   pages: {
     signIn: "/admin/login",
   },

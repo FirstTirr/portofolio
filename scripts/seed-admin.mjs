@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 async function main() {
   const username = process.argv[2] || "admin";
-  const password = process.argv[3] || "admin123";
+  const password = process.argv[3] || "admin123.";
 
   if (!username || !password) {
     console.log("Usage: node scripts/seed-admin.mjs <username> <password>");

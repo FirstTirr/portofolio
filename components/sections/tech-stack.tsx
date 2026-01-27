@@ -1,7 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Settings } from "lucide-react";
+import {
+  Code,
+  Layout,
+  Settings,
+  Database,
+  Terminal,
+  Globe,
+} from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Card } from "@/components/ui/card";
 import { TechStack as TechStackModel } from "@prisma/client";
@@ -11,8 +18,7 @@ interface TechStackProps {
 }
 
 export const TechStack = ({ data }: TechStackProps) => {
-  // Fallback if no data
-  if (!data || data.length === 0) {
+  if (data.length === 0) {
     return (
       <section id="tech-stack" className="py-20 relative overflow-hidden">
         <div className="container max-w-4xl mx-auto px-6 text-center">
@@ -24,23 +30,15 @@ export const TechStack = ({ data }: TechStackProps) => {
 
   return (
     <section id="tech-stack" className="py-20 relative overflow-hidden">
-      <div className="container max-w-5xl mx-auto px-6">
-        <div className="flex flex-col items-center text-center mb-12">
-          <div className="flex items-center gap-2 mb-4">
-            <span className="p-2 rounded-lg bg-primary/10 text-primary">
-              <Settings className="w-6 h-6" />
-            </span>
-            <h2 className="text-3xl font-bold">Tech Stack</h2>
-          </div>
-          <p className="text-muted-foreground max-w-2xl">
-            A collection of tools and technologies I use most often for game
-            prototyping, web development, and AI experimentation, covering
-            everything from exploration and building to deployment and
-            maintenance.
-          </p>
-        </div>
+      <div className="container max-w-6xl mx-auto px-6">
+        <SectionHeading
+          title="Tech Stack"
+          subtitle="My Technical Arsenal"
+          description="A collection of tools and technologies I use most often for game prototyping, web development, and AI experimentation, covering everything from exploration and building to deployment and maintenance."
+          align="center"
+        />
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mt-12">
           {data.map((item, index) => (
             <motion.div
               key={item.id}
@@ -49,19 +47,21 @@ export const TechStack = ({ data }: TechStackProps) => {
               transition={{ delay: index * 0.05, duration: 0.3 }}
               viewport={{ once: true }}
             >
-              <Card className="bg-secondary/5 border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1 h-32 flex flex-col items-center justify-center gap-3 group">
+              <Card className="flex flex-col items-center justify-center p-6 h-32 bg-secondary/5 border-border/50 hover:bg-secondary/10 hover:border-primary/50 transition-all duration-300 group cursor-pointer hover:shadow-lg hover:shadow-primary/5">
                 {item.icon ? (
-                  <div className="w-10 h-10 relative flex items-center justify-center">
+                  <div className="mb-3 relative w-10 h-10 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
                     <img
                       src={item.icon}
                       alt={item.name}
-                      className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
+                      className="w-full h-full object-contain drop-shadow-md"
                     />
                   </div>
                 ) : (
-                  <Settings className="w-8 h-8 text-muted-foreground/50" />
+                  <div className="mb-3 p-2 rounded-lg bg-background/50 text-muted-foreground group-hover:text-primary transition-colors">
+                    <Code className="w-8 h-8" />
+                  </div>
                 )}
-                <span className="font-medium text-foreground/80 group-hover:text-primary transition-colors text-sm text-center px-2">
+                <span className="text-sm font-medium text-center text-foreground/80 group-hover:text-foreground transition-colors">
                   {item.name}
                 </span>
               </Card>
@@ -76,3 +76,16 @@ export const TechStack = ({ data }: TechStackProps) => {
     </section>
   );
 };
+
+function getIconForCategory(category: string) {
+  const lower = category.toLowerCase();
+  if (lower.includes("frontend") || lower.includes("core"))
+    return <Code className="w-5 h-5 text-blue-400" />;
+  if (lower.includes("framework") || lower.includes("library"))
+    return <Layout className="w-5 h-5 text-purple-400" />;
+  if (lower.includes("backend") || lower.includes("database"))
+    return <Database className="w-5 h-5 text-green-400" />;
+  if (lower.includes("tool") || lower.includes("devops"))
+    return <Settings className="w-5 h-5 text-orange-400" />;
+  return <Terminal className="w-5 h-5 text-gray-400" />;
+}

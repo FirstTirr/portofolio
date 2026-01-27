@@ -16,11 +16,10 @@ export const Certificates = ({ data }: CertificatesProps) => {
   if (!data || data.length === 0) return null;
 
   const mappedCertificates = data.map((c) => ({
-    id: c.id,
     title: c.name,
     issuer: c.issuer,
     date: format(new Date(c.issueDate), "yyyy"), // Extract year for simple display
-    link: c.credentialUrl,
+    link: c.credentialUrl || "#",
     image:
       c.imageUrl || "https://placehold.co/600x400/101010/FFF?text=Certificate",
   }));
@@ -35,7 +34,7 @@ export const Certificates = ({ data }: CertificatesProps) => {
           <div className="flex items-center gap-2 mb-2">
             <span className="h-px w-8 bg-primary/50"></span>
             <span className="text-sm font-news font-medium text-primary uppercase tracking-widest">
-              Pencapaian
+              Achievements
             </span>
             <span className="h-px w-8 bg-primary/50"></span>
           </div>
@@ -45,7 +44,7 @@ export const Certificates = ({ data }: CertificatesProps) => {
             viewport={{ once: true }}
             className="text-4xl md:text-5xl font-bold"
           >
-            Sertifikat
+            Certifications
           </motion.h2>
         </div>
 
@@ -57,7 +56,7 @@ export const Certificates = ({ data }: CertificatesProps) => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="group relative flex flex-col bg-card border border-border/50 rounded-3xl overflow-hidden hover:border-primary/50 transition-all hover:shadow-2xl"
+              className="group relative bg-card border border-border/50 rounded-3xl overflow-hidden hover:border-primary/50 transition-all hover:shadow-2xl"
             >
               {/* Image Container */}
               <div className="relative aspect-video w-full overflow-hidden bg-secondary">
@@ -70,44 +69,29 @@ export const Certificates = ({ data }: CertificatesProps) => {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter grayscale group-hover:grayscale-0"
                 />
                 <div className="absolute top-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
-                  {cert.link && (
-                    <Link
-                      href={cert.link}
-                      className="p-3 bg-background/80 backdrop-blur-md rounded-full text-foreground hover:text-primary transition-colors block"
-                    >
-                      <ExternalLink className="w-5 h-5" />
-                    </Link>
-                  )}
+                  <Link
+                    href={cert.link}
+                    className="p-3 bg-background/80 backdrop-blur-md rounded-full text-foreground hover:text-primary transition-colors block"
+                  >
+                    <ExternalLink className="w-5 h-5" />
+                  </Link>
                 </div>
               </div>
 
-              <div className="p-6 relative z-10 flex flex-col h-full">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex-1 mr-4">
-                    <h3 className="font-bold text-xl group-hover:text-primary transition-colors line-clamp-2">
+              <div className="p-6 relative z-10">
+                <div className="flex items-start justify-between mb-2">
+                  <div>
+                    <h3 className="font-bold text-xl group-hover:text-primary transition-colors">
                       {cert.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground mt-1 font-medium">
+
+                    <p className="text-sm text-muted-foreground mt-1">
                       {cert.issuer}
                     </p>
                   </div>
-                  <span className="text-xs font-mono py-1 px-2 rounded bg-secondary text-muted-foreground shrink-0">
+                  <span className="text-xs font-mono py-1 px-2 rounded bg-secondary text-muted-foreground">
                     {cert.date}
                   </span>
-                </div>
-
-                <div className="mt-auto pt-4 border-t border-border/50">
-                  <Button
-                    asChild
-                    variant="secondary"
-                    size="sm"
-                    className="w-full group/btn hover:bg-primary hover:text-primary-foreground transition-all"
-                  >
-                    <Link href={`/certificate/${cert.id}`}>
-                      Lihat
-                      <ExternalLink className="w-4 h-4 ml-2 opacity-50 group-hover/btn:opacity-100 transition-opacity" />
-                    </Link>
-                  </Button>
                 </div>
               </div>
             </motion.div>

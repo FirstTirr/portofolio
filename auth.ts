@@ -7,9 +7,6 @@ import { authConfig } from "./auth.config";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
-  trustHost: true,
-  secret: process.env.AUTH_SECRET,
-  session: { strategy: "jwt" },
   providers: [
     Credentials({
       name: "Admin Login",
@@ -19,7 +16,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       },
       authorize: async (credentials) => {
         try {
-          console.log("Authorize start");
+          console.log("Attempting login...");
           const schema = z.object({
             username: z.string(),
             password: z.string(),
@@ -28,7 +25,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           const parsed = schema.safeParse(credentials);
 
           if (!parsed.success) {
-            console.log("Invalid credentials structure");
+            console.log("Validation failed");
             return null;
           }
 
@@ -39,27 +36,39 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           });
 
           if (!admin) {
-            console.log("Admin not found");
+            console.log("User not found in DB");
+            // For security, you might want to return null regardless,
+            // but checking if any admin exists at all is useful for init.
             return null;
           }
 
           const passwordsMatch = await bcrypt.compare(password, admin.password);
 
           if (!passwordsMatch) {
-            console.log("Password mismatch");
+            console.log("Password wrong");
             return null;
           }
 
-          console.log("Login successful");
+          console.log("Login success");
           return {
             id: admin.id,
             name: admin.username,
           };
         } catch (error) {
-          console.error("Auth error:", error);
+          console.error("Auth Error:", error);
           return null;
         }
       },
     }),
   ],
+  pages: {
+    signIn: "/admin/login",
+  },
+  callbacks: {
+    async session({ session, token }) {
+      if (token.sub && session.user) {
+      }
+      return session;
+    },
+  },
 });

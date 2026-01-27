@@ -70,12 +70,14 @@ export const Certificates = ({ data }: CertificatesProps) => {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter grayscale group-hover:grayscale-0"
                 />
                 <div className="absolute top-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Link
-                    href={cert.link}
-                    className="p-3 bg-background/80 backdrop-blur-md rounded-full text-foreground hover:text-primary transition-colors block"
-                  >
-                    <ExternalLink className="w-5 h-5" />
-                  </Link>
+                  {cert.link && (
+                    <Link
+                      href={cert.link}
+                      className="p-3 bg-background/80 backdrop-blur-md rounded-full text-foreground hover:text-primary transition-colors block"
+                    >
+                      <ExternalLink className="w-5 h-5" />
+                    </Link>
+                  )}
                 </div>
               </div>
 

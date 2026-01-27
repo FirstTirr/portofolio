@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+import { Certificate } from "@prisma/client";
 import { addCertificate, deleteCertificate } from "@/app/lib/crud-actions";
 import { DeleteButton } from "@/components/admin/delete-button";
 import { Button } from "@/components/ui/button";
@@ -86,7 +87,7 @@ export default async function AdminCertificatesPage() {
         <div>
           <h2 className="text-2xl font-bold mb-4">Certificates List</h2>
           <div className="space-y-4">
-            {certificates.map((item) => (
+            {certificates.map((item: Certificate) => (
               <Card key={item.id}>
                 <CardHeader className="flex flex-row justify-between items-start pb-2">
                   <div className="flex gap-4">

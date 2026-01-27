@@ -16,10 +16,10 @@ export const authConfig = {
       }
 
       // Protect admin pages
-      if (isAdminPage && !isLoginPage) {
-        if (isLoggedIn) return true;
-        return false; // Redirect to login
-      }
+      // if (isAdminPage && !isLoginPage) {
+      //   if (isLoggedIn) return true;
+      //   return false; // Redirect to login
+      // }
 
       return true;
     },

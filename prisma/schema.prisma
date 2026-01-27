@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Model untuk Admin (Login sederhana)
+model Admin {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  password  String   // Password harus di-hash nanti
+  createdAt DateTime @default(now())
+}
+
+model TechStack {
+  id        String   @id @default(cuid())
+  name      String
+  icon      String?  // Bisa simpan nama icon, url gambar, atau svg string
+  category  String?  // Frontend, Backend, Database, dll
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String
+  imageUrl    String?
+  demoUrl     String?
+  repoUrl     String?
+  techStack   String[] // Array of strings (contoh: ["React", "Node"])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Certificate {
+  id           String   @id @default(cuid())
+  name         String
+  issuer       String
+  issueDate    DateTime
+  credentialUrl String?
+  imageUrl     String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// Untuk CV/Experience/Education, biasanya lebih kompleks. 
+// Ini contoh sederhana untuk Experience
+model Experience {
+  id          String   @id @default(cuid())
+  position    String
+  company     String
+  startDate   DateTime
+  endDate     DateTime? // Nullable jika "Present"
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

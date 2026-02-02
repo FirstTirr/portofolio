@@ -105,6 +105,19 @@ export function AdminSidebar() {
               <Settings className="h-5 w-5 text-zinc-500 group-hover:text-white" />
               Settings
             </button>
+            <form
+              action={async () => {
+                await handleSignOut();
+              }}
+            >
+              <button
+                type="submit"
+                className="w-full group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-zinc-400 hover:bg-red-500/10 hover:text-red-400 transition-all"
+              >
+                <LogOut className="h-5 w-5 text-zinc-500 group-hover:text-red-400" />
+                Sign Out
+              </button>
+            </form>
           </nav>
         </div>
       </div>

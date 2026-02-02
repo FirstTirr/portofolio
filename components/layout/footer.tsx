@@ -14,7 +14,7 @@ export const Footer = () => {
 
         <div className="flex items-center gap-6">
           <Link
-            href="#"
+            href="https://github.com/FirstTirr"
             className="text-muted-foreground hover:text-foreground transition-colors"
           >
             <Github className="w-5 h-5" />

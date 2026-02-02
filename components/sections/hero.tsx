@@ -64,7 +64,7 @@ export const Hero = () => {
               I'M <span className="text-muted-foreground/50">FATHIR</span>
               <br />
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/50">
-               ADZAN SATIA
+                ADZAN SATIA
               </span>
               <span className="text-primary animate-pulse ml-2">_</span>
             </motion.h1>
@@ -111,7 +111,7 @@ export const Hero = () => {
                 View Work
               </Button>
             </Link>
-            <Link href="#contact">
+            <Link href="https://wa.me/+6281266591758">
               <Button
                 variant="outline"
                 size="lg"
@@ -129,7 +129,10 @@ export const Hero = () => {
             className="flex items-center gap-6 text-muted-foreground"
           >
             {/* Social Icons */}
-            <Link href="#" className="hover:text-foreground transition-colors">
+            <Link
+              href="https://github.com/FirstTirr"
+              className="hover:text-foreground transition-colors"
+            >
               <Github className="w-5 h-5" />
             </Link>
             <Link href="#" className="hover:text-foreground transition-colors">
@@ -197,7 +200,11 @@ export const Hero = () => {
             </div>
 
             {/* Github (Blue) - Modernized */}
-            <div className="col-span-1 row-span-2 bg-black/40 hover:bg-zinc-900 rounded-2xl p-5 flex flex-col justify-between border border-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer group relative overflow-hidden">
+            <Link
+              href="https://github.com/FirstTirr"
+              target="_blank"
+              className="col-span-1 row-span-2 bg-black/40 hover:bg-zinc-900 rounded-2xl p-5 flex flex-col justify-between border border-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer group relative overflow-hidden"
+            >
               <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-150"></div>
 
               <div className="flex justify-between items-start relative z-10">
@@ -209,10 +216,10 @@ export const Hero = () => {
                   GitHub
                 </span>
                 <span className="text-[10px] text-zinc-500 group-hover:text-zinc-300 uppercase tracking-widest font-medium transition-colors">
-                  @username
+                  Fathir Adzan Satia
                 </span>
               </div>
-            </div>
+            </Link>
           </div>
         </motion.div>
       </div>

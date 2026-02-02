@@ -18,19 +18,22 @@ export async function GET() {
         hasDatabaseUrl: !!process.env.DATABASE_URL,
         hasAuthSecret: !!process.env.AUTH_SECRET,
         nodeEnv: process.env.NODE_ENV,
-      }
+      },
     });
   } catch (error: any) {
     console.error("Database connection error:", error);
-    return NextResponse.json({
-      status: "error",
-      message: "Database connection failed",
-      error: error.message,
-      stack: error.stack,
-      envCheck: {
-        hasDatabaseUrl: !!process.env.DATABASE_URL,
-        hasAuthSecret: !!process.env.AUTH_SECRET,
-      }
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        status: "error",
+        message: "Database connection failed",
+        error: error.message,
+        stack: error.stack,
+        envCheck: {
+          hasDatabaseUrl: !!process.env.DATABASE_URL,
+          hasAuthSecret: !!process.env.AUTH_SECRET,
+        },
+      },
+      { status: 500 },
+    );
   }
 }

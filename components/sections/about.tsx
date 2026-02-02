@@ -31,76 +31,56 @@ export const About = ({ data = [] }: AboutProps) => {
   const techStacks = useMemo(() => {
     if (!data || data.length === 0) return [];
 
-    const grouped = data.reduce(
-      (acc, item) => {
-        // Fallback: If category is null/Other, use "General" BUT if we want to mimic the old behavior
-        // where it cycled, we might want to split them if they are all in one group.
-        // For now, let's stick to strict categories from DB.
-        const category =
-          item.category && item.category !== "Other"
-            ? item.category
-            : "General";
-
-        if (!acc[category]) {
-          acc[category] = [];
-        }
-        acc[category].push(item.name);
-        return acc;
-      },
-      {} as Record<string, string[]>,
-    );
-
-    const result = Object.entries(grouped).map(([category, items]) => {
-      let icon = <Code className="w-8 h-8 text-blue-500" />;
+    return data.map((item) => {
+      let iconNode: React.ReactNode = (
+        <Code className="w-8 h-8 text-blue-500" />
+      );
       let color = "hover:bg-blue-500/10";
 
-      // Simple heuristic for icons/colors based on category name
-      const lowerCat = category.toLowerCase();
-      if (lowerCat.includes("framework") || lowerCat.includes("library")) {
-        icon = <Layout className="w-8 h-8 text-purple-500" />;
+      // Use category or name to determine style
+      const lowerCat = (item.category || "").toLowerCase();
+      const lowerName = item.name.toLowerCase();
+
+      if (
+        lowerCat.includes("framework") ||
+        lowerCat.includes("library") ||
+        lowerName.includes("react") ||
+        lowerName.includes("next") ||
+        lowerName.includes("vue")
+      ) {
+        iconNode = <Layout className="w-8 h-8 text-purple-500" />;
         color = "hover:bg-purple-500/10";
       } else if (
         lowerCat.includes("tool") ||
         lowerCat.includes("devops") ||
-        lowerCat.includes("config") ||
-        lowerCat.includes("general")
+        lowerCat.includes("design") ||
+        lowerName.includes("figma") ||
+        lowerName.includes("git")
       ) {
-        icon = <Settings className="w-8 h-8 text-orange-500" />;
+        iconNode = <Settings className="w-8 h-8 text-orange-500" />;
         color = "hover:bg-orange-500/10";
       }
 
+      // If icon is a URL/image, use it instead
+      if (
+        item.icon &&
+        (item.icon.startsWith("http") || item.icon.startsWith("/"))
+      ) {
+        iconNode = (
+          <img
+            src={item.icon}
+            alt={item.name}
+            className="w-10 h-10 object-contain"
+          />
+        );
+      }
+
       return {
-        icon,
-        title: category,
-        items: items.join(" • "),
+        icon: iconNode,
+        title: item.name,
         color,
       };
     });
-
-    // CRITICAL FIX: If we only have 1 group (likely "General"), split it into chunks to simulate animation
-    // The user wants it to cycle "one by one" or at least rotate info.
-    if (result.length === 1 && result[0].title === "General") {
-      const allItemsString = result[0].items; // "A • B • C • D..."
-      const allItems = allItemsString.split(" • ");
-
-      // If we have enough items, split them into groups of 3 to create fake "slides"
-      if (allItems.length > 3) {
-        const slides = [];
-        const chunkSize = 3;
-        for (let i = 0; i < allItems.length; i += chunkSize) {
-          const chunk = allItems.slice(i, i + chunkSize);
-          slides.push({
-            icon: <Settings className="w-8 h-8 text-orange-500" />,
-            title: "Tools & Skills",
-            items: chunk.join(" • "),
-            color: "hover:bg-orange-500/10",
-          });
-        }
-        return slides;
-      }
-    }
-
-    return result;
   }, [data]);
 
   useEffect(() => {
@@ -144,13 +124,13 @@ export const About = ({ data = [] }: AboutProps) => {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[180px]">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:auto-rows-[180px]">
           {/* Bio Card - Large */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="md:col-span-2 md:row-span-2 bg-card rounded-3xl p-8 border border-border relative overflow-hidden flex flex-col justify-between group"
+            className="md:col-span-2 md:row-span-2 bg-card rounded-3xl p-8 border border-border relative overflow-hidden flex flex-col justify-between group min-h-[300px] md:min-h-0"
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150" />
 
@@ -176,7 +156,7 @@ export const About = ({ data = [] }: AboutProps) => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="md:col-span-1 md:row-span-1 bg-card rounded-3xl p-6 border border-border flex flex-col justify-between hover:border-primary/50 transition-colors"
+            className="md:col-span-1 md:row-span-1 bg-card rounded-3xl p-6 border border-border flex flex-col justify-between hover:border-primary/50 transition-colors min-h-[180px]"
           >
             <Briefcase className="w-8 h-8 text-blue-500" />
             <div>
@@ -188,7 +168,7 @@ export const About = ({ data = [] }: AboutProps) => {
           </motion.div>
 
           {/* Tech Stack Card - Animated */}
-          <div className="md:col-span-1 md:row-span-1 bg-card rounded-3xl p-6 border border-border overflow-hidden relative group">
+          <div className="md:col-span-1 md:row-span-1 bg-card rounded-3xl p-6 border border-border overflow-hidden relative group min-h-[180px]">
             {techStacks.length > 0 ? (
               <>
                 <AnimatePresence mode="wait">
@@ -203,9 +183,6 @@ export const About = ({ data = [] }: AboutProps) => {
                     {techStacks[stackIndex]?.icon}
                     <div className="font-bold text-center">
                       {techStacks[stackIndex]?.title}
-                    </div>
-                    <div className="text-xs text-muted-foreground text-center">
-                      {techStacks[stackIndex]?.items}
                     </div>
                   </motion.div>
                 </AnimatePresence>
@@ -241,7 +218,7 @@ export const About = ({ data = [] }: AboutProps) => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="md:col-span-2 md:row-span-1 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground rounded-3xl p-6 flex items-center justify-between relative overflow-hidden"
+            className="md:col-span-2 md:row-span-1 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground rounded-3xl p-6 flex items-center justify-between relative overflow-hidden min-h-[180px]"
           >
             <div className="relative z-10">
               <div className="text-lg font-bold mb-1">

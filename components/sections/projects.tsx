@@ -13,12 +13,15 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Project as ProjectModel } from "@prisma/client";
+import { useState } from "react";
 
 interface ProjectsProps {
   data: ProjectModel[];
 }
 
 export const Projects = ({ data }: ProjectsProps) => {
+  const [visibleCount, setVisibleCount] = useState(4);
+
   // If no data, show empty state or return null (or keep initial mock data?)
   // Better to show empty state if DB is empty to avoid confusion.
   if (!data || data.length === 0) {
@@ -33,7 +36,7 @@ export const Projects = ({ data }: ProjectsProps) => {
   }
 
   // Map DB data to ProjectCard format
-  const mappedProjects = data.map((p) => ({
+  const mappedProjects = data.slice(0, visibleCount).map((p) => ({
     title: p.title,
     description: p.description,
     tech: p.techStack,
@@ -43,6 +46,10 @@ export const Projects = ({ data }: ProjectsProps) => {
     demoUrl: p.demoUrl,
     repoUrl: p.repoUrl,
   }));
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => prev + 4);
+  };
 
   return (
     <section id="projects" className="py-32 px-6 bg-background relative">
@@ -81,9 +88,15 @@ export const Projects = ({ data }: ProjectsProps) => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <Button variant="outline" className="gap-2">
-              View All Projects <ArrowRight className="w-4 h-4" />
-            </Button>
+            {visibleCount < data.length && (
+              <Button
+                variant="outline"
+                className="gap-2"
+                onClick={handleLoadMore}
+              >
+                View All Projects <ArrowRight className="w-4 h-4" />
+              </Button>
+            )}
           </motion.div>
         </div>
 

@@ -173,10 +173,6 @@ export const Hero = () => {
                   <span className="block text-white font-bold text-xl tracking-tight">
                     Fathir Adzan Satia
                   </span>
-                  {/* <span className="text-xs text-zinc-400 font-mono flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                    Open to work
-                  </span> */}
                 </div>
               </div>
             </div>

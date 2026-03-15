@@ -1,8 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Experience as ExperienceModel } from "@prisma/client";
 import { format } from "date-fns";
+
+interface ExperienceModel {
+  id: string;
+  position: string;
+  company: string;
+  startDate: Date;
+  endDate: Date | null;
+  description: string;
+}
 
 interface ExperienceProps {
   data: ExperienceModel[];

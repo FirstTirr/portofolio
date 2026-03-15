@@ -1,5 +1,7 @@
 "use client";
 
+import { useActionState } from "react";
+import { sendContactEmail } from "@/app/lib/contact-action";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,6 +16,11 @@ import {
 } from "lucide-react";
 
 export const Contact = () => {
+  const [formState, formAction, isPending] = useActionState(sendContactEmail, {
+    success: false,
+    message: "",
+  });
+
   return (
     <section
       id="contact"
@@ -72,7 +79,7 @@ export const Contact = () => {
 
             <div className="space-y-6">
               <a
-                href="mailto:hello@example.com"
+                href="mailto:fathiradzans@gmail.com"
                 className="group flex items-center gap-4 p-4 rounded-xl hover:bg-secondary/50 transition-colors border border-transparent hover:border-border"
               >
                 <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
@@ -83,7 +90,7 @@ export const Contact = () => {
                     Email{" "}
                     <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </h3>
-                  <p className="text-muted-foreground">hello@example.com</p>
+                  <p className="text-muted-foreground">fathiradzans@gmail.com</p>
                 </div>
               </a>
 
@@ -105,7 +112,7 @@ export const Contact = () => {
                 <Terminal className="w-24 h-24" />
               </div>
               <h4 className="font-mono font-bold text-primary mb-2 flex items-center gap-2">
-                <span className="text-green-500">$</span> echo "Let's Connect"
+                <span className="text-green-500">$</span> console.log("Hello, World!");
               </h4>
               <p className="text-sm text-muted-foreground font-mono">
                 Whether you have a question or just want to say hi, I'll try my
@@ -120,7 +127,7 @@ export const Contact = () => {
             viewport={{ once: true }}
             className="bg-card border border-border rounded-3xl p-8 shadow-2xl relative"
           >
-            <form className="space-y-6 relative z-10">
+            <form action={formAction} className="space-y-6 relative z-10">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label
@@ -131,6 +138,8 @@ export const Contact = () => {
                   </label>
                   <Input
                     id="name"
+                    name="name"
+                    required
                     placeholder="John Doe"
                     className="bg-background/50 border-border focus:ring-primary/20 h-12"
                   />
@@ -144,7 +153,9 @@ export const Contact = () => {
                   </label>
                   <Input
                     id="email"
+                    name="email"
                     type="email"
+                    required
                     placeholder="john@example.com"
                     className="bg-background/50 border-border focus:ring-primary/20 h-12"
                   />
@@ -159,6 +170,8 @@ export const Contact = () => {
                 </label>
                 <Input
                   id="subject"
+                  name="subject"
+                  required
                   placeholder="Project Inquiry"
                   className="bg-background/50 border-border focus:ring-primary/20 h-12"
                 />
@@ -172,16 +185,26 @@ export const Contact = () => {
                 </label>
                 <Textarea
                   id="message"
+                  name="message"
+                  required
                   placeholder="Tell me about your project..."
                   className="min-h-[150px] bg-background/50 border-border focus:ring-primary/20 resize-none"
                 />
               </div>
+              
+              {formState.message && (
+                <p className={`text-sm ${formState.success ? "text-green-500" : "text-red-500"}`}>
+                  {formState.message}
+                </p>
+              )}
+
               <Button
                 type="submit"
                 size="lg"
+                disabled={isPending}
                 className="w-full h-12 text-base font-semibold"
               >
-                Send Message <Send className="w-4 h-4 ml-2" />
+                {isPending ? "Sending..." : "Send Message"} <Send className="w-4 h-4 ml-2" />
               </Button>
             </form>
           </motion.div>

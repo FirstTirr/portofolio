@@ -10,7 +10,7 @@ export interface Project {
   description: string;
   tech: string[];
   color?: string; // Optional now
-  icon: any;
+  icon?: any;
   link: string;
   imageUrl?: string | null;
   demoUrl?: string | null;
@@ -24,6 +24,8 @@ export const ProjectCard = ({
   project: Project;
   index: number;
 }) => {
+  const Icon = project.icon || Folder;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -72,7 +74,7 @@ export const ProjectCard = ({
         <div className="flex items-start justify-between mb-6">
           {!project.imageUrl && (
             <div className="p-3 bg-secondary rounded-xl group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
-              <project.icon className="w-6 h-6" />
+              <Icon className="w-6 h-6" />
             </div>
           )}
           {/* Fallback links if no image */}

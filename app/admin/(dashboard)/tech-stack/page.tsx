@@ -52,8 +52,16 @@ export default async function AdminTechStackPage() {
                   />
                 </div>
 
-                {/* Hidden category input, defaulting to General */}
-                <input type="hidden" name="category" value="General" />
+                <div className="space-y-2">
+                  <Label htmlFor="category">Category</Label>
+                  <Input
+                    id="category"
+                    name="category" 
+                    placeholder="e.g. Framework, Database, Tool, or Language"
+                    required
+                  />
+                  <p className="text-xs text-muted-foreground">This will be displayed as the module type (e.g. FRAMEWORK, DATABASE)</p>
+                </div>
 
                 <ImageUpload name="icon" label="Logo Image (Drag & Drop)" />
 

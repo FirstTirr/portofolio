@@ -12,16 +12,25 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { Project as ProjectModel } from "@prisma/client";
 import { useState } from "react";
+
+// Define interface locally
+interface ProjectModel {
+  id: string;
+  title: string;
+  slug: string;
+  description: string;
+  imageUrl: string | null;
+  demoUrl: string | null;
+  repoUrl: string | null;
+  techStack: string[];
+}
 
 interface ProjectsProps {
   data: ProjectModel[];
 }
 
 export const Projects = ({ data }: ProjectsProps) => {
-  const [visibleCount, setVisibleCount] = useState(4);
-
   // If no data, show empty state or return null (or keep initial mock data?)
   // Better to show empty state if DB is empty to avoid confusion.
   if (!data || data.length === 0) {
@@ -35,8 +44,9 @@ export const Projects = ({ data }: ProjectsProps) => {
     );
   }
 
-  // Map DB data to ProjectCard format
-  const mappedProjects = data.slice(0, visibleCount).map((p) => ({
+
+  // Map DB data to ProjectCard format, limit to 4
+  const mappedProjects = data.slice(0, 4).map((p) => ({
     title: p.title,
     description: p.description,
     tech: p.techStack,
@@ -47,9 +57,7 @@ export const Projects = ({ data }: ProjectsProps) => {
     repoUrl: p.repoUrl,
   }));
 
-  const handleLoadMore = () => {
-    setVisibleCount((prev) => prev + 4);
-  };
+  // Removed handleLoadMore logic
 
   return (
     <section id="projects" className="py-32 px-6 bg-background relative">
@@ -88,15 +96,11 @@ export const Projects = ({ data }: ProjectsProps) => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            {visibleCount < data.length && (
-              <Button
-                variant="outline"
-                className="gap-2"
-                onClick={handleLoadMore}
-              >
-                View All Projects <ArrowRight className="w-4 h-4" />
-              </Button>
-            )}
+             <Button asChild variant="outline" className="gap-2">
+                <Link href="/projects">
+                  View All Projects <ArrowRight className="w-4 h-4" />
+                </Link>
+             </Button>
           </motion.div>
         </div>
 

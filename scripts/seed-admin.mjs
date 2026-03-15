@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 async function main() {
   const username = process.argv[2] || "admin";
-  const password = process.argv[3] || "admin123.";
+  const password = process.argv[3] || "@admin123/.";
 
   if (!username || !password) {
     console.log("Usage: node scripts/seed-admin.mjs <username> <password>");
@@ -16,19 +16,19 @@ async function main() {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   try {
-    const user = await prisma.admin.create({
-      data: {
+    const user = await prisma.admin.upsert({
+      where: { username },
+      update: {
+        password: hashedPassword,
+      },
+      create: {
         username,
         password: hashedPassword,
       },
     });
-    console.log(`Created admin user: ${user.username}`);
+    console.log(`Updated admin user: ${user.username} with new password.`);
   } catch (e) {
-    if (e.code === "P2002") {
-      console.log(`User '${username}' already exists.`);
-    } else {
-      console.error(e);
-    }
+    console.error(e);
   }
 }
 

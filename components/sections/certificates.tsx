@@ -1,12 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Award, ExternalLink, ImageIcon } from "lucide-react";
+import { ExternalLink, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image"; // Import next/image
 import { Button } from "@/components/ui/button";
-import { Certificate as CertificateModel } from "@prisma/client";
 import { format } from "date-fns";
+
+// Define interface locally
+interface CertificateModel {
+  id: string;
+  name: string;
+  issuer: string;
+  issueDate: Date;
+  credentialUrl: string | null;
+  imageUrl: string | null;
+}
 
 interface CertificatesProps {
   data: CertificateModel[];
@@ -15,7 +23,10 @@ interface CertificatesProps {
 export const Certificates = ({ data }: CertificatesProps) => {
   if (!data || data.length === 0) return null;
 
-  const mappedCertificates = data.map((c) => ({
+  // Limit to 4 for the section view
+  const displayData = data.slice(0, 4);
+
+  const mappedCertificates = displayData.map((c) => ({
     title: c.name,
     issuer: c.issuer,
     date: format(new Date(c.issueDate), "yyyy"), // Extract year for simple display
@@ -30,22 +41,35 @@ export const Certificates = ({ data }: CertificatesProps) => {
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
       <div className="container max-w-6xl mx-auto">
-        <div className="flex flex-col items-center mb-16 text-center">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="h-px w-8 bg-primary/50"></span>
-            <span className="text-sm font-news font-medium text-primary uppercase tracking-widest">
-              Achievements
-            </span>
-            <span className="h-px w-8 bg-primary/50"></span>
+        <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="h-px w-8 bg-primary/50"></span>
+              <span className="text-sm font-news font-medium text-primary uppercase tracking-widest">
+                Achievements
+              </span>
+            </div>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-4xl md:text-5xl font-bold"
+            >
+              Certifications
+            </motion.h2>
           </div>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+          
+           <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold"
           >
-            Certifications
-          </motion.h2>
+             <Button asChild variant="outline" className="gap-2">
+                <Link href="/certificates">
+                  View All Certificates <ArrowRight className="w-4 h-4" />
+                </Link>
+             </Button>
+          </motion.div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
